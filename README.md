@@ -54,6 +54,8 @@ socket.io-client, axios, immer, node-sass, uuid
 # TODO
 
 - Deployable packages to avoid relying on developpment servers (slow, no hot-reload)
+- Backend improvements
+  - Synchrnoize timestamp between devices (currently messages are ordered first come first served)
 - UI improvements
   - Color picker for background/foreground
   - Clear adb log in browser and on devices
