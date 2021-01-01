@@ -116,7 +116,7 @@ class App extends Component {
   launchSocket = () => {
     if (this.state.socket === null || !this.state.socket.connected) {
       console.log("Launching SocketIO client");
-      let socket = socketIOClient(`http://localhost:5000/test`);
+      let socket = socketIOClient(`http://localhost:5000/wadb`);
       socket.on("connect", () => {
         console.log("Connected to wesocket server");
       });

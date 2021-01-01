@@ -27,7 +27,7 @@ socketio = SocketIO(app, async_mode="threading",
 # socketio = SocketIO(app, async_mode=None, logger=False)
 socketio.init_app(app, cors_allowed_origins="*")
 
-NS = "/test"
+NS = "/wadb"
 adb = Adb(socketio, NS, args.adb_exe)
 
 
