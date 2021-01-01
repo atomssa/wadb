@@ -1,7 +1,9 @@
 import React from "react";
 
-const AdbLine = (props) => {
-  const { lineGrp, bg, lvl } = props;
+const AdbLines = (props) => {
+  const { lineGrp } = props;
+  const bg = lineGrp[0].bg;
+  const lvl = lineGrp[0].lvl ? lineGrp[0].lvl.toLowerCase() : "nolvl";
 
   const cls = `adb adb-b${bg} adb-${lvl}`;
   return (
@@ -37,4 +39,4 @@ const AdbLine = (props) => {
   );
 };
 
-export default AdbLine;
+export default AdbLines;
