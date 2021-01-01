@@ -18,6 +18,7 @@ class NavBar extends Component {
       reloadDevices,
       addRemoveExcludeRegexp,
       toggleTailMode,
+      searchFilter,
     } = this.props;
     return (
       <div className="navbar">
@@ -101,6 +102,7 @@ class NavBar extends Component {
             type="text"
             name="search"
             placeholder="search in log..."
+            onChange={searchFilter}
           />
         </div>
       </div>

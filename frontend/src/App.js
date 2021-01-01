@@ -13,7 +13,9 @@ class App extends Component {
     socket: null,
     devices: [],
     lines: [],
+    searchStr: [],
     settings: {
+      minSearch: 4,
       exclude: {
         title: "Exclude",
         rexps: [
@@ -97,10 +99,13 @@ class App extends Component {
   };
 
   processAdbLog = (newLines) => {
+    const { searchStr, settings, lines } = this.state;
     this.setState({
-      lines: produce(this.state.lines, (draft) => {
+      lines: produce(lines, (draft) => {
         newLines.forEach((line) => {
-          line.bg = this.state.settings.colors[line.device].bg;
+          line.bg = settings.colors[line.device].bg;
+          line.show =
+            searchStr.length === 0 || this.searchMatch(searchStr, lines);
           if (draft.length === 0) draft.push([line]);
           else {
             const last = draft[draft.length - 1];
@@ -192,6 +197,44 @@ class App extends Component {
     });
   };
 
+  // we want to avoid unecessarily looping through all lines
+  //  - only if there are enough characters to search (> minSearch)
+  //  - if user is deleting search charcters and goes from minSearch+1 to minSearch characters
+  updateLineShow = (searchStr, unset) => {
+    console.log(`Updating with searchStr=${searchStr} unset=${unset}`);
+    this.setState({
+      searchStr,
+      lines: produce(this.state.lines, (draft) => {
+        draft.forEach((lineGrp) => {
+          lineGrp.forEach((line) => {
+            line.show = unset || this.searchMatch(searchStr, line);
+          });
+        });
+      }),
+    });
+  };
+
+  searchMatch = (searchStr, line) => {
+    return searchStr.every((subStr) => line.msg.includes(subStr));
+  };
+
+  searchFilter = (event) => {
+    const { value } = event.target;
+    const _value = value.split(/(\s+)/).filter((x) => !x.includes(" "));
+    const { minSearch } = this.state.settings;
+    const { searchStr } = this.state;
+    console.log(
+      `searchStr=${event.target.value} value=${_value} minSearch=${minSearch} state.searchStr=${searchStr}`
+    );
+    if (_value.join("").length > minSearch) this.updateLineShow(_value, false);
+    else if (
+      _value.join("").length <= minSearch &&
+      searchStr.join("").length > minSearch
+    )
+      this.updateLineShow([], true);
+    else if (searchStr.join("").length !== 0) this.setState({ searchStr: [] });
+  };
+
   render() {
     return (
       <div className="App">
@@ -207,6 +250,7 @@ class App extends Component {
           reloadDevices={this.reloadDevices}
           addRemoveExcludeRegexp={this.addRemoveExcludeRegexp}
           toggleTailMode={this.toggleTailMode}
+          searchFilter={this.searchFilter}
         />
         <AdbTailer lines={this.state.lines} />
       </div>
