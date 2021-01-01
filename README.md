@@ -22,7 +22,7 @@ from inside the backend/ repository. The path to adb is required argument. This 
 
 # frontend/
 
-react.js app that connects to the flask app on local host and offers a gui for some customization what is displayed, including device/app picker, regexp selector and column picker.
+react.js app that connects to the backend app on local host and shows log output from selected devices/packages. It offers a gui for some customization of how logcat output is displayed, including regexp selector and column picker.
 
 After starting the backend, change to the frontend/ directory and launch:
 
@@ -35,21 +35,21 @@ This will open a browser window at localhost:3000, and will listen to 127.0.0.1:
 
 # v0.0.1
 
-To run this version, a python 3.8 env and npm are required with the below dependencies. This version runs using development servers.
+This version was tested on python 3.8 env and npm v14.15.3 with the below dependencies using development servers of flask and react.js
 
 ## python dependencies
 
-flas, flask_socketio, flask_cors, argparse
+flask, flask_socketio, flask_cors, argparse
 
 ## js dependencies
 
 ### react
 
-react, react-dom, react-alert, react-modal, react-tabs, react-scroll
+react, react-dom, react-scripts, react-alert, react-modal, react-tabs, react-scroll, web-vitals
 
 ### others
 
-socket.io-client axios, immer, node-sass, uuid
+socket.io-client, axios, immer, node-sass, uuid
 
 # TODO
 
