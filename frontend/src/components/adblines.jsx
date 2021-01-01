@@ -5,15 +5,21 @@ const AdbLines = (props) => {
   const { lineGrp } = props;
   const bg = lineGrp[0].bg;
   const lvl = lineGrp[0].lvl ? lineGrp[0].lvl.toLowerCase() : "nolvl";
-
-  const cls = `adb adb-b${bg} adb-${lvl}`;
-  return lineGrp.some((line) => line.show) ? (
-    <div className={`adb adb-b${bg}`}>
+  const show = lineGrp.some((line) => line.show);
+  const cls = `${show ? "adb" : "adb-rem"} adb-b${bg} adb-${lvl}`;
+  return (
+    <div className={`${show ? "adb" : "adb-rem"} adb-b${bg}`}>
       {lineGrp.map((line) =>
-        line.show ? <AdbLine line={line} cls={cls} key={line.ln} /> : null
+        line.show ? (
+          <AdbLine
+            line={line}
+            cls={`${line.show ? "adb" : "adb-rem"} ${cls}`}
+            key={line.ln}
+          />
+        ) : null
       )}
     </div>
-  ) : null;
+  );
 };
 
 export default AdbLines;

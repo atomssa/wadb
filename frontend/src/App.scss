@@ -18,6 +18,9 @@ $ui-color-b2: #0d0c49;
   margin: 0px;
   padding: 1px;
   font-family: "Roboto Mono", monospace;
+  &-rem {
+    display: none;
+  }
 }
 
 .adb-b0 {

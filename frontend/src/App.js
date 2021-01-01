@@ -105,7 +105,7 @@ class App extends Component {
         newLines.forEach((line) => {
           line.bg = settings.colors[line.device].bg;
           line.show =
-            searchStr.length === 0 || this.searchMatch(searchStr, lines);
+            searchStr.length === 0 || this.searchMatch(searchStr, line);
           if (draft.length === 0) draft.push([line]);
           else {
             const last = draft[draft.length - 1];
