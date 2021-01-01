@@ -61,3 +61,4 @@ socket.io-client, axios, immer, node-sass, uuid
   - Clear adb log in browser and on devices
   - Text search functionality
   - Option for log message warapping. For now
+  - Save settings between sessions (maybe send to backend, write json to file, named sessions...)
