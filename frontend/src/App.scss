@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap");
+
+$ui-color-bkp: #3c3f41;
+
+$ui-color-bg: #252526;
+$ui-color-fg: #c7c5c5;
+$ui-color-bg-item: #070707;
+$ui-color-bg-widget: #381616;
+
+$ui-color-b0: #2f353a;
+$ui-color-b1: #37073b;
+$ui-color-b2: #0d0c49;
+
+.adb {
+  font-size: 12px;
+  text-align: left;
+  white-space: pre;
+  margin: 0px;
+  padding: 1px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.adb-b0 {
+  background-color: $ui-color-b0;
+}
+
+.adb-b1 {
+  background-color: $ui-color-b1;
+}
+
+.adb-b2 {
+  background-color: $ui-color-b2;
+}
+
+.adb-e {
+  color: red;
+}
+
+.adb-w {
+  color: orange;
+}
+
+.adb-i {
+  color: yellow;
+}
+
+.adb-d {
+  color: #eeeeee94;
+}
+
+.adb-v {
+  color: white;
+}
+
+.adb-nolvl {
+  background-color: #c7c5c5;
+  color: #161718;
+}
+
+.navbar {
+  background-color: $ui-color-bg;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: space-between;
+  height: 40px;
+  z-index: 1;
+
+  .navbar-group {
+    display: flex;
+    flex-direction: horizontal;
+    margin-left: 5px;
+
+    .navbar-item {
+      padding: 2px 4px;
+      margin: 5px 10px 5px 0;
+      border-width: 2px;
+      border-radius: 6px;
+      border-style: solid;
+      background-color: $ui-color-bg-item;
+      color: $ui-color-fg;
+    }
+    .navbar-item:hover {
+      background-color: $ui-color-bg;
+    }
+  }
+
+  .navbar-dropdown {
+    background-color: $ui-color-b2;
+    display: block;
+  }
+
+  .dropdown-content {
+    display: block;
+  }
+
+  .navbar-dropdown:hover .dropdown-content {
+    display: block;
+  }
+}
+
+.settings {
+  background-color: $ui-color-bg;
+  color: $ui-color-fg;
+  max-width: 800px;
+  max-height: 800px;
+  margin: auto;
+
+  &-text {
+    color: $ui-color-fg;
+  }
+
+  &-widget {
+    padding: 2px 4px;
+    margin: 5px 10px 5px 0;
+    border-width: 2px;
+    border-radius: 6px;
+    border-style: solid;
+    background-color: $ui-color-bg-item;
+    color: $ui-color-fg;
+  }
+
+  &-widget:hover {
+    background-color: $ui-color-bg;
+  }
+}

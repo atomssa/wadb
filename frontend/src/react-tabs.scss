@@ -1,0 +1,66 @@
+$light-ui-color-bg: #fff;
+$light-ui-color-border: #aaa;
+$light-ui-color-fg: black;
+$light-ui-color-focus: hsl(208, 99%, 50%);
+
+$dark-ui-color-bg: #252526;
+$dark-ui-color-border: #aaa;
+$dark-ui-color-fg: #dfdbdb;
+$dark-ui-color-focus: hsl(208, 99%, 50%);
+
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+
+  &__tab-list {
+    border-bottom: 1px solid $dark-ui-color-border;
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+  &__tab {
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    bottom: -1px;
+    position: relative;
+    list-style: none;
+    padding: 3px 6px;
+    cursor: pointer;
+
+    &--selected {
+      background: $dark-ui-color-bg;
+      border-color: $dark-ui-color-border;
+      color: $dark-ui-color-fg;
+      border-radius: 5px 5px 0 0;
+    }
+
+    &--disabled {
+      color: GrayText;
+      cursor: default;
+    }
+
+    &:focus {
+      box-shadow: 0 0 5px $dark-ui-color-focus;
+      border-color: $dark-ui-color-focus;
+      outline: none;
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        left: -4px;
+        right: -4px;
+        bottom: -5px;
+        background: $dark-ui-color-bg;
+      }
+    }
+  }
+
+  &__tab-panel {
+    display: none;
+
+    &--selected {
+      display: block;
+    }
+  }
+}
