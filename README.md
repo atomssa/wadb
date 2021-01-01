@@ -1,6 +1,6 @@
 # wadb
 
-Tail adb log from multiple devices simultaneously in the browser. Android studio integrated adb logcat doesn't offer possibility to view output from multiple devices in the same window. This can be helpful when debugging interaction between two installs for multiuser apps like games or chat apps.
+Tail adb log from multiple devices simultaneously in the browser. Android studio integrated adb logcat doesn't offer possibility to view output from multiple devices in the same window. This can be helpful when debugging interaction between two installs for multiuser apps like games or chat apps. Tested on windows WSL2.
 
 # Screenshot
 
@@ -15,10 +15,10 @@ The background color allows to distinguish which part of the log comes from whic
 Python websocket server based on SocketIO that connects to adb and handles streaming of logcat output from all connected devices on the developpment machine. After installing the dependencies, run
 
 ```shell
-python main.py
+python main.py --adb-exe=$PATH_TO_ANDROID_TOOLS_ADB_BINARY
 ```
 
-from inside the backend/ repository. It will start a dev server broadcasting at 127.0.0.1:5000
+from inside the backend/ repository. The path to adb is required argument. This command will start a dev server broadcasting on 127.0.0.1:5000.
 
 # frontend/
 
@@ -39,7 +39,7 @@ To run this version, a python 3.8 env and npm are required with the below depend
 
 ## python dependencies
 
-flas, flask_socketio, flask_cors
+flas, flask_socketio, flask_cors, argparse
 
 ## js dependencies
 
@@ -58,3 +58,4 @@ socket.io-client axios, immer, node-sass, uuid
   - Color picker for background/foreground
   - Clear adb log in browser and on devices
   - Text search functionality
+  - Option for log message warapping. For now

@@ -7,9 +7,17 @@ from flask_socketio import SocketIO, send, emit
 from reader.adb import Adb
 import json
 import os
+import argparse
+
+parser = argparse.ArgumentParser(description="Launch adb on wesocket server")
+parser.add_argument('-s', '--static-folder', required=False, default="")
+parser.add_argument('-a', '--adb-exe', required=True)
+args = parser.parse_args()
+
+print(args)
 
 app = flask.Flask(
-    __name__, static_folder='/home/ermias/AndroidStudioProjects/logcat/web/frontend')
+    __name__, static_folder=args.static_folder)
 app.config['DEBUG'] = True
 cors = CORS(app)
 app.config["CORS_HEADERS"] = 'Content-Type'
@@ -20,7 +28,7 @@ socketio = SocketIO(app, async_mode="threading",
 socketio.init_app(app, cors_allowed_origins="*")
 
 NS = "/test"
-adb = Adb(socketio, NS)
+adb = Adb(socketio, NS, args.adb_exe)
 
 
 @app.route('/', methods=['GET'], defaults={'path': ''})

@@ -10,13 +10,13 @@ ThreadHolder = namedtuple("ThreadHolder", ["thread", "stop_evt", "rexp"])
 
 DISPATCHER = "dispatcher"
 HEARTBEAT = "heartbeat"
-ADB_EXE = "/mnt/c/Users/etato/AppData/Local/Android/Sdk/platform-tools/adb.exe"
 
 
 class Adb(object):
-    def __init__(self, socketio, namespace):
+    def __init__(self, socketio, namespace, adb_exe):
         self.__ns = namespace
         self.__socketio = socketio
+        self.__adb_exe = adb_exe
 
         self.__adb_procs = {}
         self.__threads = {}
@@ -38,10 +38,10 @@ class Adb(object):
                          DISPATCHER: self.__dispatcher}
 
     def __adb_cmd(self, device):
-        return [ADB_EXE, "-s", device, "logcat"]
+        return [self.__adb_exe, "-s", device, "logcat"]
 
     def __adb_ps_cmd(self, device):
-        return [ADB_EXE, "-s", device, "shell", "ps", "-A"]
+        return [self.__adb_exe, "-s", device, "shell", "ps", "-A"]
 
     def __thread_key(self, device, pkg):
         return f"{device}:{pkg}"
@@ -84,7 +84,7 @@ class Adb(object):
         return pkgs
 
     def get_devices(self):
-        cmd = [ADB_EXE, "devices"]
+        cmd = [self.__adb_exe, "devices"]
         proc = sp.Popen(cmd, stdout=sp.PIPE)
         res = proc.communicate()[0].strip().decode("utf-8").splitlines()
         devices = {}
