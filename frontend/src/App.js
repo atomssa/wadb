@@ -47,7 +47,7 @@ class App extends Component {
 
   componentWillUnmount() {
     const { socket } = this.state;
-    if (socket != null) {
+    if (socket !== null) {
       socket.emit("stop_everything");
       socket.off();
       socket.close();
@@ -96,38 +96,19 @@ class App extends Component {
     });
   };
 
-  processAdbMessages = (newLines) => {
-    const [first, ...rest] = newLines.reduce((acc, value) => {
-      if (value.device in this.state.settings.colors) {
-        value.bg = this.state.settings.colors[value.device].bg;
-      } else {
-        console.log(
-          `ERROR: colors settings doesn't contain key for ${value.device}`
-        );
-      }
-      if (acc.length && acc[acc.length - 1][0].lvl === value.lvl)
-        acc[acc.length - 1].push(value);
-      else acc.push([value]);
-      return acc;
-    }, []);
+  processAdbLog = (newLines) => {
     this.setState({
       lines: produce(this.state.lines, (draft) => {
-        if (draft.length === 0) {
-          draft.push(first);
-        } else {
-          const last = draft[draft.length - 1];
-          if (last.length === 0) {
-            console.log("WTFFFFFFF!!!");
-            draft.push(first);
-          } else {
-            if (last[0].lvl === first[0].lvl && last[0].bg === first[0].bg) {
-              draft[draft.length - 1].push(...first);
-            } else {
-              draft.push(first);
-            }
+        newLines.forEach((line) => {
+          line.bg = this.state.settings.colors[line.device].bg;
+          if (draft.length === 0) draft.push([line]);
+          else {
+            const last = draft[draft.length - 1];
+            if (last[0].lvl === line.lvl && last[0].bg === line.bg)
+              last.push(line);
+            else draft.push([line]);
           }
-        }
-        draft.push(...rest);
+        });
       }),
     });
   };
@@ -144,7 +125,7 @@ class App extends Component {
         this.setState({ lines: [] });
       });
       socket.on("adb_log", (msg) => {
-        this.processAdbMessages(JSON.parse(msg));
+        this.processAdbLog(JSON.parse(msg));
       });
       socket.on("echo_test_data_reply", (msg) => {
         const json = JSON.parse(msg);
