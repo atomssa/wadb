@@ -59,6 +59,7 @@ socket.io-client, axios, immer, node-sass, uuid
 - UI improvements
   - Color picker for background/foreground
   - Clear adb log in browser and on devices
-  - Text search functionality
-  - Option for log message warapping. For now
+  - ~~Text search functionality~~
+  - Option for log message warapping. For now, no wrapping for long lines. they just extend to the right
   - Save settings between sessions (maybe send to backend, write json to file, named sessions...)
+  - linkify source file with line numbers in stack traces when file is part of package being debugged
