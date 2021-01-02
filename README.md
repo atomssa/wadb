@@ -45,11 +45,11 @@ flask, flask_socketio, flask_cors, argparse
 
 ### react
 
-react, react-dom, react-scripts, react-alert, react-modal, react-tabs, react-scroll, web-vitals
+react, react-dom, react-scripts, react-alert, react-modal, react-tabs, react-scroll
 
 ### others
 
-socket.io-client, axios, immer, node-sass, uuid
+socket.io-client, axios, immer, node-sass, uuid, web-vitals
 
 # TODO
 
